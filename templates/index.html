@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Potato Crop Information & Detection</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-color: rgb(246, 242, 236);
+      font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    /* Navigation Bar */
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #4CAF50;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #45a049;
+    }
+
+    /* Page Header */
+    h1 {
+      text-align: center;
+      padding: 20px;
+      font-size: 2.5em;
+      color: #333;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* Sections */
+    .section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 20px;
+      margin: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: rgb(246, 242, 236);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .gdp{
+            width: 60%;
+            padding-right: 20px;
+            text-align:left;
+            font-size: 20px;
+    }
+    .section1 {
+      padding: 20px;
+      margin: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color:  rgb(246, 242, 236);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align:center;
+    }
+    .section2 {
+      padding: 20px;
+      margin: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: rgb(246, 242, 236);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align:center;
+    }
+    .about {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 50px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            width: 60%;
+            padding-right: 20px;
+            text-align:left;
+            font-size: 20px;
+
+        }
+    /* Upload Section */
+
+    .upload {
+            text-align: center;
+            align-items: center;
+            padding: 80px;
+            margin: 50px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    .upload input[type="file"] {
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .upload-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .upload-button:hover {
+      background-color: #45a049;
+    }
+
+    /* "Back to Top" Button */
+    #btn-back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      height: 40px;
+      width: 40px;
+      background-color: #4CAF50;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      text-align: center;
+      line-height: 40px;
+      font-size: 1.5em;
+      display: none;
+      cursor: pointer;
+    }
+
+
+
+    /* FAQ Section */
+    .faq {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .faq-question:hover {
+      color: #4CAF50;
+    }
+
+    .faq-answer {
+      display: none;
+      margin-left: 1.5rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- "Back to Top" Button -->
+  <button id="btn-back-to-top" title="Back to Top">&#x2191;</button>
+
+  <!-- Page Header -->
+  <h1 style="background-color:rgb(246, 242, 236)">Potato Crop Information & Detection</h1>
+
+  <!-- Navigation Bar -->
+  <ul>
+    <li style="font-size:20px"><a href="#about">About</a></li>
+    <li style="font-size:20px"><a href="#upload">Upload Image</a></li>
+    <li style="font-size:20px"><a href="#gdp">GDP Impact</a></li>
+    <li style="font-size:20px"><a href="#contact">Contact Us</a></li>
+    <li style="font-size:20px"><a href="#faqs">FAQs</a></li>
+  </ul>
+
+  <!-- About Section -->
+  <div class="about" id="about">
+    <div class="content">
+    <h2 style="font-size: 40px; color: #1c64df; font-family:'Times New Roman', Times, serif;">Potatoes: A Global Perspective</h2>
+    <h3 style="font-family:'Times New Roman';"><b>Overview of Potato Production in India</b></h3>
+    <p style="font-family:'Times New Roman';">India is a significant contributor to global potato production, ranking as the second-largest producer in the world. The country yields over 50 million tons of potatoes annually, with Uttar Pradesh, West Bengal, Bihar, Punjab, and Gujarat as the leading states in production. Potatoes play a crucial role in India's agricultural sector, providing livelihoods to millions and serving as a staple in traditional Indian cuisine. This crop is used in a wide range of products, from fresh market potatoes to processed foods like chips and fries.</p>
+    <h3 style="font-family:'Times New Roman';"><b>Global Significance of Potatoes</b></h3>
+    <p style="font-family:'Times New Roman';">Potatoes are among the most important food crops globally, with a total production of around 370 million tons each year. China tops the list of potato-producing countries, followed by India, Russia, and the United States. The versatility of potatoes extends beyond the kitchen; they are also used in industrial applications like starch production and animal feed. The widespread cultivation of potatoes has made them a crucial component in addressing food security, providing essential nutrients, and supporting global agricultural economies.</p>
+  </div>
+  <img src="static\potato1.jpg" alt="Image on the Right" height="400px" style="border-radius: 5px; padding:20px">
+  </div>
+  <div class="container" id="home">
+
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+      <li data-target="#myCarousel" data-slide-to="5"></li>
+      <li data-target="#myCarousel" data-slide-to="6"></li>
+      <li data-target="#myCarousel" data-slide-to="7"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="static\pot2.jpg" alt="Los Angeles" style="width:100%;height:530px;">
+      </div>
+      <div class="item">
+        <img src="static\pot2.3.jpg" alt="Chicago" style="width:100%;height:530px;">
+      </div>
+      <div class="item">
+        <img src="static\pot2.2.jpg" alt="New york" style="width:100%;height:530px;">
+      </div>
+      <div class="item">
+        <img src="static\pot2.4.png" alt="New york" style="width:100%;height:530px;">
+      </div>
+      <div class="item">
+        <img src="static\potato2.png" alt="New york" style="width:100%;height:530px;">
+      </div>
+      <div class="item">
+        <img src="static\healthy_leaf1.JPG" alt="New york" style="width:100%;height:530px;">
+      </div>
+      <div class="item">
+        <img src="static\Early_blight_leaf.JPG" alt="New york" style="width:100%;height:530px;">
+      </div>
+      <div class="item">
+        <img src="static\late_blight_leaf.JPG" alt="New york" style="width:100%;height:530px;">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+<!-- GDP Impact Section -->
+<div class="section" id="gdp">
+  <div class="gdp">
+  <h2 style="font-family:'Times New Roman';color: #1c64df;">Economic Impact of Potato Production on India's GDP</h2>
+  <p style="font-family:'Times New Roman';">Potato production plays a significant role in India's economy, contributing to the agricultural sector and supporting the broader GDP. As the second-largest producer of potatoes globally, India generates over 50 million tons of potatoes annually. This robust production has a multi-faceted impact on the economy.
+<br>
+    Potato cultivation and processing create employment opportunities for millions of people, from farmers and laborers in the fields to workers in food processing plants and distribution networks. The potato industry also fuels demand for agricultural inputs like fertilizers, pesticides, and equipment, creating a ripple effect across related industries.
+<br>
+    Beyond the direct economic contributions, potato production in India has a substantial impact on food security and export potential. As one of the country's staple crops, potatoes support food industries, retail markets, and logistics, driving further growth in GDP. Additionally, as technology and farming practices improve, the export of Indian potatoes and potato-based products presents new avenues for economic growth and international trade.</p>
+</div>
+<img src="static\pot2.1.jpg" alt="Image on the Right" height="400px" style="border-radius: 5px; padding:20px">
+</div>
+
+  <!-- Upload Section -->
+  <div class="section1" id="upload" style="align-items: center;">
+    <h2 style="color: #1c64df;">Upload an Image for Disease Detection</h2>
+    <p style="font-size: 20px; font-family: 'Times New Roman', Times, serif;">To detect diseases on your potato leaves, upload a clear image of the leaf. Our system will analyze it and provide feedback.</p>
+    <form action="/predict" method="post" enctype="multipart/form-data" style="text-align: center;">
+      <input type="file" id="file" name="file" accept="image/*" style="margin-left: 500px;padding: 15px;" required>
+      <button class="upload-button">Upload</button>
+    </form>
+  </div>
+
+
+  <!-- Contact Section -->
+  <div class="section2" id="contact">
+    <h2 style="color: #1c64df;">Contact Us</h2>
+    <p style="font-size: 15px;">If you have any questions or need assistance, feel free to reach out to us:</p>
+    <p style="font-size: 15px;">Email: contact@potatoinfoindia.com</p>
+    <p style="font-size: 15px;">Phone: +91 9876543210</p>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="faq" id="faqs">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleAnswer(this)">What are the major potato-producing states in India?</div>
+      <div class="faq-answer">Uttar Pradesh, West Bengal, and Bihar are among the largest potato-producing states in India.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleAnswer(this)">How does potato production contribute to India's GDP?</div>
+      <div class="faq-answer">Potato production contributes to India's GDP by providing employment, supporting related industries, and driving exports.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleAnswer(this)">What are the benefits of potatoes in a diet?</div>
+      <div class="faq-answer">Potatoes are a rich source of carbohydrates and contain essential nutrients like vitamin C and potassium. They can be a healthy addition to a balanced diet.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleAnswer(this)">How do I upload an image for disease detection?</div>
+      <div class="faq-answer">To upload an image, simply go to the "Upload Image" section, select an image file from your device, and click "Upload."</div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // "Back to Top" Functionality
+    let backToTopButton = document.getElementById("btn-back-to-top");
+
+    // Show the button when the user scrolls down 20px or more
+    window.onscroll = function() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        backToTopButton.style.display = "block";
+      } else {
+        backToTopButton.style.display = "none";
+      }
+    };
+
+    // Scroll back to the top when the button is clicked
+    backToTopButton.addEventListener("click", function() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+
+    // Toggle FAQ Answers
+    function toggleAnswer(element) {
+      const answer = element.nextElementSibling;
+      if (answer.style.display === "none" || element.style.display === "") {
+        answer.style.display = "block";
+      } else {
+        answer.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>

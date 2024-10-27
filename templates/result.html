@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            background-image: url('/static/potato4.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;  /* Center horizontally */
+            align-items: center;  /* Center vertically */
+        }
+       .container {
+            background-color: rgba(255, 255, 255, 0.9);  /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 600px;
+            height:500px;
+            justify-content: center/* Adjust the width as needed */
+        }
+        .heading{
+            text-align:center;
+        }
+        .para1{
+         text-align:center;
+        }
+        .para2{
+         text-align:center;
+        }
+        .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+        .an{
+         text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Prediction Result</h1>
+        <p class="para1">Predicted Class: <b>{{ result.class_name }}</b></p>
+        <p class="para2">Confidence: <b>{{ result.confidence }}%</b></p>
+        <img src="/uploads/{{ filename }}" alt="Uploaded Image" width="256" class="center">
+        <br>
+        <a class="an" href="/">Back to Home</a>
+    </div>
+</body>
+</html>
