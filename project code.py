@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import models, layers
+from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
 import numpy as np
 from sklearn.metrics import accuracy_score, recall_score, f1_score
@@ -10,6 +11,7 @@ BATCH_SIZE = 32
 CHANNELS = 3
 EPOCHS = 50
 
+# Load dataset
 dataset = tf.keras.preprocessing.image_dataset_from_directory(
     'plantvillage dataset/color',
     shuffle=True,
@@ -22,8 +24,7 @@ num_classes = len(class_names)
 
 # Function to partition the dataset
 def get_dataset_partitions_tf(ds, train_split=0.8, val_split=0.1, test_split=0.1, shuffle=True, shuffle_size=10000):
-    ds_size = len(ds)
-
+    ds_size = tf.data.experimental.cardinality(ds).numpy()
     if shuffle:
         ds = ds.shuffle(shuffle_size, seed=10)
 
@@ -72,18 +73,22 @@ model = models.Sequential([
     layers.MaxPooling2D((2, 2)),
     layers.Flatten(),
     layers.Dense(64, activation='relu'),
-    layers.Dense(num_classes, activation='softmax')  # Use num_classes for flexibility
+    layers.Dense(num_classes, activation='softmax')
 ])
 
-# Compile the model with SparseCategoricalCrossentropy
+# Compile the model
 model.compile(loss=SparseCategoricalCrossentropy(), optimizer='adam', metrics=['accuracy'])
+
+# Early stopping
+early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
 
 # Train the model
 history = model.fit(
     train_ds,
     epochs=EPOCHS,
     batch_size=BATCH_SIZE,
-    validation_data=val_ds
+    validation_data=val_ds,
+    callbacks=[early_stopping]
 )
 
 # Evaluate on test data
@@ -91,35 +96,27 @@ scores = model.evaluate(test_ds)
 print("Test score:", scores)
 
 # Save the model
-model.save("new_potato1.h5")
+model.save("new_potato1.keras", save_format="keras")
 
-# Print training history
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-
-loss = history.history['loss']
-val_loss = history.history['val_loss']
+# Calculate additional metrics
 y_true = []
 y_pred = []
-for images, labels in dataset:
+for images, labels in test_ds:
     y_true.extend(labels.numpy())
     predictions = model.predict(images)
     y_pred.extend(np.argmax(predictions, axis=1))
 
-# Calculate accuracy
+# Calculate accuracy, recall, and F1-score
 accuracy = accuracy_score(y_true, y_pred)
-
-# Calculate recall
 recall = recall_score(y_true, y_pred, average='weighted')
-
-# Calculate F1-score
 f1 = f1_score(y_true, y_pred, average='weighted')
 
-print("Accuracy:", accuracy)
-print("Recall:", recall)
-print("F1-score:", f1)
+print("Test Accuracy:", accuracy)
+print("Test Recall:", recall)
+print("Test F1-score:", f1)
 
-print("Training accuracy:", acc)
-print("Validation accuracy:", val_acc)
-print("Training loss:", loss)
-print("Validation loss:", val_loss)
+# Print training history
+print("Training Accuracy:", history.history['accuracy'])
+print("Validation Accuracy:", history.history['val_accuracy'])
+print("Training Loss:", history.history['loss'])
+print("Validation Loss:", history.history['val_loss'])
