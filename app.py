@@ -11,7 +11,7 @@ import shutil
 app = Flask(__name__)
 
 # Load your pre-trained model
-model_path = 'new_potato.keras'  # Update with your model's path
+model_path = 'new_potato1.keras'  # Update with your model's path
 model = load_model(model_path,compile=False)
 
 # Set up the image upload folder
